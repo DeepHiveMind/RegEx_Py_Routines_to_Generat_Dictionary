@@ -61,7 +61,7 @@ However, Python provides such a way that we can focus more on the pattern itself
 re.search(r'[a-z]+', 'AbCdEfG', re.IGNORECASE)
 re.search(r'[a-z]+', 'AbCdEfG', re.I)
 ```
-Example
+Example  
 
 Input: re.search(r'[a-z]+', 'AbCdEfG', re.IGNORECASE)
 Output: <re.Match object; span=(0, 7), match='AbCdEfG'>
@@ -106,7 +106,7 @@ Output: <re.Match object; span=(0, 9), match='abc   abc'>
 
 re.sub() is one of the most commonly used functions in Python regex. It tries to find a pattern (pattern)in a string (string) and replace it with the provided replacement string (repl).
 For example, the following code will hide any mobile numbers in a string.
-re.sub(r'\d', '*', 'User\'s mobile number is 1234567890')
+>re.sub(r'\d', '*', 'User\'s mobile number is 1234567890')
 ```
 Example
 
@@ -124,7 +124,7 @@ Output: "User's mobile number is *******890"
 
 Sometimes we may want to use a pattern multiple times. Most likely an r-string variable that can be reused is enough. However, if we want to use the pattern for different purposes, as well as want to improve the readability, using re.compile() might be a better choice.
 
-pattern = re.compile('abc')
+>pattern = re.compile('abc')
 
 After defined the patter with re.compile(), we can use it as many time as needed.
 ```
@@ -142,7 +142,7 @@ Output: <re.Match object; span=(0, 3), match='abc'>
 
 Sometimes we want to use regex to extract information from the strings that follow the same pattern. Then, put them into a dictionary is a pretty good idea. For example, the string "My name is Christopher Tao and I like Python." contains a person’s first name, last name and what language is preferred. If we have a lot of such string and want to extract information into a dictionary, we can actually do that without any overhead. The Python regex can achieve it out-of-the-box.
 
-re.match(
+>re.match(
     r"My name is (?P<first_name>\w+) (?P<last_name>\w+) and I like (?P<preference>\w+).", 
     "My name is Christopher Tao and I like Python."
 ).groupdict()
@@ -162,7 +162,7 @@ We have to follow the pattern (?P<Y>...) where Y is the key name, ... is the def
 We all know that regex can catch patterns. However, sometimes we want to catch the patterns in a more “advanced” way. For example, we don’t know what exactly the string will be matched by a pattern, but we want to catch the whole thing if it repeated multiple times.
 In fact, the example we’ve used in section 1 and 3 exactly achieved this. Let me just provide another example. That is, we want to find out if there is a letter that has repeated in a string. If so, what it is?
 
-pair = re.compile(r'''
+>pair = re.compile(r'''
     .*    # Match any number of any charaters
     (.)   # Match 1 character, whatever it is (except new-line), this will be the "group 1"
     .*    # Match any number of any charaters
