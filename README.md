@@ -100,3 +100,23 @@ Input: re.search(r'''
 ''', 'abc   abc', re.X)
 Output: <re.Match object; span=(0, 9), match='abc   abc'>
 
+4. Customise Substitution Behaviour of re.sub()
+
+re.sub() is one of the most commonly used functions in Python regex. It tries to find a pattern (pattern)in a string (string) and replace it with the provided replacement string (repl).
+For example, the following code will hide any mobile numbers in a string.
+re.sub(r'\d', '*', 'User\'s mobile number is 1234567890')
+
+Example
+
+Input: re.sub(r'\d', '*', 'User\'s mobile number is 1234567890')
+Output: "User's mobile number is **********"
+
+Most developers will know the function up to here. However, fewer will know that we can actually use a function for the repl parameter.For example, we still want to hide the user’s phone number, but we want to reveal the last 3 digits to make sure that the user has a clue what’s that number.
+
+Example
+
+Input: re.sub(r'\d+', lambda s: '*' * (len(s[0])-3) + s[0][-3:], 'User\'s mobile number is 1234567890')
+Output: "User's mobile number is *******890"
+
+
+
