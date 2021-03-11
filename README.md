@@ -3,7 +3,7 @@ Regular expression implementation using Python
 
 Regular Expression (aka Regex) is one of the most important and common in any programming languages. Of course, this also applies to Python. Python has some quite unique regex usage patterns compared to other programming languages.This page gives a 7 useful tips regarding the regex in Python for you. They are either little tricks that can improve your productivity, solve some complex problems or improve your code readability. Hope they’ll be helpful!
 
-1. Always use “r-string”
+**Always use “r-string”**
 
 A lot of learners know that we should use “r-string” when we define a regex pattern. However, I found that many people don’t know the reason. Some learners think of the “r-string” as “regex string”, which is totally wrong. It should be “raw string” instead.
 Just like other programming languages, Python has the “escape” mechanism in the strings. For example, when we want to have a string with quotes, they have to be escaped to let the compiler knows that the string should not finish, the quotes are just part of the string.
@@ -39,7 +39,7 @@ Input: re.search('(\w+)\s+\1', 'abc   abc')
 
 Output: None
 
-2. Use re.IGNORECASE Flag When Necessary
+**Use re.IGNORECASE Flag When Necessary**
 
 The “flags” is kind of unique in Python Regex which not all the other programming languages would have. That is, create regex patterns that are case-insensitive.
 Suppose we want to match a series of letters regardless of upper cases or lower cases. Of course, we can write it as follows.
