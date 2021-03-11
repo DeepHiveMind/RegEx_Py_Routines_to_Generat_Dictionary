@@ -11,14 +11,15 @@ Just like other programming languages, Python has the “escape” mechanism in 
 >s = 'I\'m Smith'
 
 Of course, not only the quotes can be escaped, there are a lot of other scenarios that we have to use backward slashes. For example, the \n in the following string will be interpreted as “new-line”.
+```
+Example
 
-'''
-print('Chris\nSmith')
+Input: print('Chris\nSmith')
 
 Output:
 Chris 
 Smith
-'''
+```
 If we mean to have the \n as part of the string, in other words, it should not be a new-line, we can use the “r-string” to tell Python do not interpret it.
 
 Input: print(r'Chris\nSmith')
