@@ -36,3 +36,29 @@ However, if we don’t use “r-string” here, the “group” indicator \1 won
 re.search('(\w+)\s+\1', 'abc   abc')
 
 Output: None
+
+2. Use re.IGNORECASE Flag When Necessary
+3. The “flags” is kind of unique in Python Regex which not all the other programming languages would have. That is, create regex patterns that are case-insensitive.
+Suppose we want to match a series of letters regardless of upper cases or lower cases. Of course, we can write it as follows.
+
+re.search(r'[a-zA-Z]+', 'AbCdEfG')
+
+This is definitely the standard way, and if we don’t add A-Z, it won’t match the whole string as expected.
+
+Input : re.search(r'[a-zA-Z]+', 'AbCdEfG')
+Output: <re.Match object; span=(0, 7), match='AbCdEfG'>
+
+Input : re.search(r'[a-z]+', 'AbCdEfG')
+Output: <re.Match object; span=(1, 2), match='b'>
+
+However, Python provides such a way that we can focus more on the pattern itself and don’t need to worry about the cases of the letters. That is to use the re.IGNORECASE. You can even make it very short as re.I which does the same thing.
+
+re.search(r'[a-z]+', 'AbCdEfG', re.IGNORECASE)
+re.search(r'[a-z]+', 'AbCdEfG', re.I)
+
+Input: re.search(r'[a-z]+', 'AbCdEfG', re.IGNORECASE)
+Output: <re.Match object; span=(0, 7), match='AbCdEfG'>
+
+Input: re.search(r'[a-z]+', 'AbCdEfG', re.I)
+Output: <re.Match object; span=(0, 7), match='AbCdEfG'>
+
