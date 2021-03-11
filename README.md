@@ -118,7 +118,7 @@ Example
 Input: re.sub(r'\d+', lambda s: '*' * (len(s[0])-3) + s[0][-3:], 'User\'s mobile number is 1234567890')
 Output: "User's mobile number is *******890"
 
-5. Use re.compile() to Enable Reusability
+**Use re.compile() to Enable Reusability**
 
 Sometimes we may want to use a pattern multiple times. Most likely an r-string variable that can be reused is enough. However, if we want to use the pattern for different purposes, as well as want to improve the readability, using re.compile() might be a better choice.
 
@@ -135,6 +135,50 @@ Output: <re.Match object; span=(0, 3), match='abc'>
 
 Input: pattern.search('abcdef')
 Output: <re.Match object; span=(0, 3), match='abc'>
+
+**Use Regex to Generate a Dictionary**
+
+Sometimes we want to use regex to extract information from the strings that follow the same pattern. Then, put them into a dictionary is a pretty good idea. For example, the string "My name is Christopher Tao and I like Python." contains a person’s first name, last name and what language is preferred. If we have a lot of such string and want to extract information into a dictionary, we can actually do that without any overhead. The Python regex can achieve it out-of-the-box.
+
+re.match(
+    r"My name is (?P<first_name>\w+) (?P<last_name>\w+) and I like (?P<preference>\w+).", 
+    "My name is Christopher Tao and I like Python."
+).groupdict()
+
+Input: re.match(
+    r"My name is (?P<first_name>\w+) (?P<last_name>\w+) and I like (?P<preference>\w+).", 
+    "My name is Christopher Tao and I like Python."
+).groupdict()
+Output: {'first_name': 'Christopher', 'last_name': 'Tao', 'preference': 'Python'}
+
+In the regex pattern, we can define the “key” of the matched string, and then they will be automatically mapped into a dictionary.
+We have to follow the pattern (?P<Y>...) where Y is the key name, ... is the defined regex pattern.
+
+7. Use Regex Groups to Catch Repeat Patterns
+
+We all know that regex can catch patterns. However, sometimes we want to catch the patterns in a more “advanced” way. For example, we don’t know what exactly the string will be matched by a pattern, but we want to catch the whole thing if it repeated multiple times.
+In fact, the example we’ve used in section 1 and 3 exactly achieved this. Let me just provide another example. That is, we want to find out if there is a letter that has repeated in a string. If so, what it is?
+
+pair = re.compile(r'''
+    .*    # Match any number of any charaters
+    (.)   # Match 1 character, whatever it is (except new-line), this will be the "group 1"
+    .*    # Match any number of any charaters
+    \1    # Match the group 1
+''', re.VERBOSE)
+pair.match('abcdefgc').groups()[0]
+
+We need to first define the pattern. In here, I used the re.VERBOSE flag so it will be more readable and understandable. In the pattern, we use parentheses to define a “group”, then use this “group” \1 later to catch the “repeated” string.
+
+Input: pair = re.compile(r'''
+    .*    # Match any number of any charaters
+    (.)   # Match 1 character, whatever it is (except new-line), this will be the "group 1"
+    .*    # Match any number of any charaters
+    \1    # Match the group 1
+''', re.VERBOSE)
+pair.match('abcdefgc').groups()[0]
+Output: 'c'
+
+Finally, we use the compiled regex pattern and try to match the string. Then, get the first element of the matched groups. It will be the first letter that has been found repeated in the string.
 
 
 
