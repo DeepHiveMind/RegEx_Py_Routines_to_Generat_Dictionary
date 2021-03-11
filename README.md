@@ -33,12 +33,15 @@ output: <re.Match object; span=(0, 9), match='abc   abc'>
 
 However, if we don’t use “r-string” here, the “group” indicator \1 won’t be recognised.
 
-re.search('(\w+)\s+\1', 'abc   abc')
+Example
+
+Input: re.search('(\w+)\s+\1', 'abc   abc')
 
 Output: None
 
 2. Use re.IGNORECASE Flag When Necessary
-3. The “flags” is kind of unique in Python Regex which not all the other programming languages would have. That is, create regex patterns that are case-insensitive.
+
+The “flags” is kind of unique in Python Regex which not all the other programming languages would have. That is, create regex patterns that are case-insensitive.
 Suppose we want to match a series of letters regardless of upper cases or lower cases. Of course, we can write it as follows.
 
 re.search(r'[a-zA-Z]+', 'AbCdEfG')
@@ -56,9 +59,44 @@ However, Python provides such a way that we can focus more on the pattern itself
 re.search(r'[a-z]+', 'AbCdEfG', re.IGNORECASE)
 re.search(r'[a-z]+', 'AbCdEfG', re.I)
 
+Example
+
 Input: re.search(r'[a-z]+', 'AbCdEfG', re.IGNORECASE)
 Output: <re.Match object; span=(0, 7), match='AbCdEfG'>
 
 Input: re.search(r'[a-z]+', 'AbCdEfG', re.I)
 Output: <re.Match object; span=(0, 7), match='AbCdEfG'>
+
+3. Use re.VERBOSE Flag to Improve the Readability
+
+One of the major drawbacks of the regex is that it has poor readability. Usually, this is the comprising that we have to face. However, do you know that Python has a better way to improve the readability of a regex pattern string? That is to use the re.VERBOSE flag.
+We can re-write the regex pattern in section 1. Originally, the pattern string has to be r'(\w+)\s+\1'. Well, this is not too bad, but suppose if we have a much more complex pattern, probably only the author can understand it. This is a very common issue with regex. However, with the verbose flag, we can write it this way.
+
+re.search(r'''
+    (\w+)   # Group 1: Match one or more letters, numbers or underscore
+    \s+     # Match one or more whitespaces
+    \1      # Match the Group 1 whatever it is
+''', 'abc   abc', re.VERBOSE)
+
+Example
+
+Input: re.search(r'''
+    (\w+)   # Group 1: Match one or more letters, numbers or underscore
+    \s+     # Match one or more whitespaces
+    \1      # Match the Group 1 whatever it is
+''', 'abc   abc', re.VERBOSE)
+Output: <re.Match object; span=(0, 9), match='abc   abc'>
+
+It is exactly equivalent to the r'(\w+)\s+\1'. Please be noticed that the flag re.VERBOSE is a must-have thing if we want to write it in this way. Otherwise, the regex won’t work, of course.
+
+Again, the flag has a short version — re.X
+
+Example
+
+Input: re.search(r'''
+    (\w+)   # Group 1: Match one or more letters, numbers or underscore
+    \s+     # Match one or more whitespaces
+    \1      # Match the Group 1 whatever it is
+''', 'abc   abc', re.X)
+Output: <re.Match object; span=(0, 9), match='abc   abc'>
 
