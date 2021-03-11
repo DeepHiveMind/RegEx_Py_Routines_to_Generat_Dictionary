@@ -8,16 +8,17 @@ Regular Expression (aka Regex) is one of the most important and common in any pr
 A lot of learners know that we should use “r-string” when we define a regex pattern. However, I found that many people don’t know the reason. Some learners think of the “r-string” as “regex string”, which is totally wrong. It should be “raw string” instead.
 Just like other programming languages, Python has the “escape” mechanism in the strings. For example, when we want to have a string with quotes, they have to be escaped to let the compiler knows that the string should not finish, the quotes are just part of the string.
 
-s = 'I\'m Smith'
+>s = 'I\'m Smith'
 
 Of course, not only the quotes can be escaped, there are a lot of other scenarios that we have to use backward slashes. For example, the \n in the following string will be interpreted as “new-line”.
 
+'''
 print('Chris\nSmith')
 
 Output:
 Chris 
 Smith
-
+'''
 If we mean to have the \n as part of the string, in other words, it should not be a new-line, we can use the “r-string” to tell Python do not interpret it.
 
 Input: print(r'Chris\nSmith')
