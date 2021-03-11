@@ -118,5 +118,24 @@ Example
 Input: re.sub(r'\d+', lambda s: '*' * (len(s[0])-3) + s[0][-3:], 'User\'s mobile number is 1234567890')
 Output: "User's mobile number is *******890"
 
+5. Use re.compile() to Enable Reusability
+
+Sometimes we may want to use a pattern multiple times. Most likely an r-string variable that can be reused is enough. However, if we want to use the pattern for different purposes, as well as want to improve the readability, using re.compile() might be a better choice.
+
+pattern = re.compile('abc')
+
+After defined the patter with re.compile(), we can use it as many time as needed.
+
+example
+
+pattern = re.compile('abc')
+
+Input: pattern.search('abc abc')
+Output: <re.Match object; span=(0, 3), match='abc'>
+
+Input: pattern.search('abcdef')
+Output: <re.Match object; span=(0, 3), match='abc'>
+
+
 
 
