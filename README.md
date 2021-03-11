@@ -3,7 +3,7 @@ Regular expression implementation using Python
 
 Regular Expression (aka Regex) is one of the most important and common in any programming languages. Of course, this also applies to Python. Python has some quite unique regex usage patterns compared to other programming languages.This page gives a 7 useful tips regarding the regex in Python for you. They are either little tricks that can improve your productivity, solve some complex problems or improve your code readability. Hope they’ll be helpful!
 
-**Always use “r-string”**
+**1.Always use “r-string”**
 
 A lot of learners know that we should use “r-string” when we define a regex pattern. However, I found that many people don’t know the reason. Some learners think of the “r-string” as “regex string”, which is totally wrong. It should be “raw string” instead.
 Just like other programming languages, Python has the “escape” mechanism in the strings. For example, when we want to have a string with quotes, they have to be escaped to let the compiler knows that the string should not finish, the quotes are just part of the string.
@@ -41,7 +41,7 @@ Input: re.search('(\w+)\s+\1', 'abc   abc')
 
 Output: None
 ```
-**Use re.IGNORECASE Flag When Necessary**
+**2.Use re.IGNORECASE Flag When Necessary**
 
 The “flags” is kind of unique in Python Regex which not all the other programming languages would have. That is, create regex patterns that are case-insensitive.
 Suppose we want to match a series of letters regardless of upper cases or lower cases. Of course, we can write it as follows.
@@ -69,7 +69,7 @@ Output: <re.Match object; span=(0, 7), match='AbCdEfG'>
 Input: re.search(r'[a-z]+', 'AbCdEfG', re.I)
 Output: <re.Match object; span=(0, 7), match='AbCdEfG'>
 ```
-**Use re.VERBOSE Flag to Improve the Readability**
+**3.Use re.VERBOSE Flag to Improve the Readability**
 
 One of the major drawbacks of the regex is that it has poor readability. Usually, this is the comprising that we have to face. However, do you know that Python has a better way to improve the readability of a regex pattern string? That is to use the re.VERBOSE flag.
 We can re-write the regex pattern in section 1. Originally, the pattern string has to be r'(\w+)\s+\1'. Well, this is not too bad, but suppose if we have a much more complex pattern, probably only the author can understand it. This is a very common issue with regex. However, with the verbose flag, we can write it this way.
@@ -102,7 +102,7 @@ Input: re.search(r'''
 ''', 'abc   abc', re.X)
 Output: <re.Match object; span=(0, 9), match='abc   abc'>
 ```
-**Customise Substitution Behaviour of re.sub()**
+**4.Customise Substitution Behaviour of re.sub()**
 
 re.sub() is one of the most commonly used functions in Python regex. It tries to find a pattern (pattern)in a string (string) and replace it with the provided replacement string (repl).
 For example, the following code will hide any mobile numbers in a string.
@@ -120,7 +120,7 @@ Example
 Input: re.sub(r'\d+', lambda s: '*' * (len(s[0])-3) + s[0][-3:], 'User\'s mobile number is 1234567890')
 Output: "User's mobile number is *******890"
 ```
-**Use re.compile() to Enable Reusability**
+**5.Use re.compile() to Enable Reusability**
 
 Sometimes we may want to use a pattern multiple times. Most likely an r-string variable that can be reused is enough. However, if we want to use the pattern for different purposes, as well as want to improve the readability, using re.compile() might be a better choice.
 
@@ -138,7 +138,7 @@ Output: <re.Match object; span=(0, 3), match='abc'>
 Input: pattern.search('abcdef')
 Output: <re.Match object; span=(0, 3), match='abc'>
 ```
-**Use Regex to Generate a Dictionary**
+**6.Use Regex to Generate a Dictionary**
 
 Sometimes we want to use regex to extract information from the strings that follow the same pattern. Then, put them into a dictionary is a pretty good idea. For example, the string "My name is Christopher Tao and I like Python." contains a person’s first name, last name and what language is preferred. If we have a lot of such string and want to extract information into a dictionary, we can actually do that without any overhead. The Python regex can achieve it out-of-the-box.
 
@@ -157,7 +157,7 @@ Output: {'first_name': 'Christopher', 'last_name': 'Tao', 'preference': 'Python'
 In the regex pattern, we can define the “key” of the matched string, and then they will be automatically mapped into a dictionary.
 We have to follow the pattern (?P<Y>...) where Y is the key name, ... is the defined regex pattern.
 
-**Use Regex Groups to Catch Repeat Patterns**
+**7.Use Regex Groups to Catch Repeat Patterns**
 
 We all know that regex can catch patterns. However, sometimes we want to catch the patterns in a more “advanced” way. For example, we don’t know what exactly the string will be matched by a pattern, but we want to catch the whole thing if it repeated multiple times.
 In fact, the example we’ve used in section 1 and 3 exactly achieved this. Let me just provide another example. That is, we want to find out if there is a letter that has repeated in a string. If so, what it is?
@@ -184,6 +184,8 @@ pair.match('abcdefgc').groups()[0]
 Output: 'c'
 ```
 Finally, we use the compiled regex pattern and try to match the string. Then, get the first element of the matched groups. It will be the first letter that has been found repeated in the string.
+
+
 
 
 
